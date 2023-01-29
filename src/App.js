@@ -1,7 +1,7 @@
 import React from 'react';
 import EducationSection from './components/EducationComponent';
 import ExpirienceSection from './components/ExperienceComponent';
-import GeneralSection from './components/ContactComponent';
+import ContactSection from './components/ContactComponent';
 import PrintProvider, { NoPrint, Print } from 'react-easy-print';
 
 
