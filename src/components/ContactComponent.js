@@ -7,10 +7,10 @@ const ContactSection = () => {
         //update the the field name value
 	};
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    //submit form
-};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		//submit form
+	};
 
     return (
 		<NoPrint>
@@ -76,5 +76,6 @@ const handleSubmit = (e) => {
 			</section>
 		</NoPrint>
 	);
+};
 
-}
+export default ContactSection;
