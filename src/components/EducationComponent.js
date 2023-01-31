@@ -1,86 +1,120 @@
 import React from 'react';
 import { NoPrint, Print } from 'react-easy-print';
+import TextSection from './TextComponent';
 
 const EducationSection = (props) => {
+
+    const [education, setEducation] = useState({
+        schoolName: '',
+        study: '',
+        from: '',
+        to: '',
+    });
+
+    const [editMode, setEditMode] = useState(false);
+
     const handleChange = (e) => {
 		const { name, value } = e.target;
-        //update the the field name value
+        setEducation((prevEducation) => {
+            return {
+                ...prevEducation,
+                [name]: value,
+            };
+        });
 	};
 
-    const handleSubmit = (e) => {
+    const handleEdit = (e) => {
         e.preventDefault();
-        //submit form
-};
+        setEditMode(true);
+    };
 
-return (
-    <NoPrint>
-        <Print printOnly>
-            <p className='warning'>Fill in the form.</p>
-        </Print>
-        <section>
-            <form 
-                className='section' 
-                action='' 
-                // onSubmit={/* */}
-                >
-                <label htmlFor='schoolName'>
-                    <p>School Name:</p>
-                    <input
-                        type='text'
-                        placeholder='School Name'
-                        name='schoolName'
-                        id='schoolName'
-                        // onChange={/* */}
-                        // value={/* */}
-                        required
-                    />
-                </label>
-                <label>
-                    <p>Title of Study:</p>
-                    <input
-                        type='text'
-                        placeholder='Title of study'
-                        name='study'
-                        // onChange={/* */}
-                        // value={/* */}
-                        required
-                    />
-                </label>
-                <label>
-                    <p>From:</p>
-                    <input
-                        type='date'
-                        name='from'
-                        placeholder='From'
-                        // onChange={/* */}
-                        // value={/* */}
-                        required
-                    />
-                </label>
+    const { schoolName, study, from, to } = education;
+    const { text, handleDelete } = props;
 
-                <label>
-                    <p>To:</p>
-                    <input
-                        type='date'
-                        name='to'
-                        placeholder='To'
-                        // onChange={handleChange}
-                        // value={to}
-                        required
-                    />
-                </label>
-                <button className='formBtn'>Save</button>
+    if (editMode) {
+        return (
+            <NoPrint>
+                <Print printOnly>
+                    <p className='warning'>Fill in the form.</p>
+                </Print>
+                <section>
+                    <form 
+                        className='section' 
+                        action='' 
+                        onSubmit={handleEdit}
+                        >
+                        <label htmlFor='schoolName'>
+                            <p>School Name:</p>
+                            <input
+                                type='text'
+                                placeholder='School Name'
+                                name='schoolName'
+                                id='schoolName'
+                                onChange={handleChange}
+                                value={schoolName}
+                                required
+                            />
+                        </label>
+                        <label>
+                            <p>Field of Study:</p>
+                            <input
+                                type='text'
+                                placeholder='Field of Study'
+                                name='study'
+                                onChange={handleChange}
+                                value={study}
+                                required
+                            />
+                        </label>
+                        <label>
+                            <p>From:</p>
+                            <input
+                                type='date'
+                                name='from'
+                                placeholder='From'
+                                onChange={handleChange}
+                                value={from}
+                                required
+                            />
+                        </label>
+
+                        <label>
+                            <p>To:</p>
+                            <input
+                                type='date'
+                                name='to'
+                                placeholder='To'
+                                onChange={handleChange}
+                                value={to}
+                                required
+                            />
+                        </label>
+                        <button className='formBtn'>Save</button>
+                        <button
+                            className='formBtn'
+                            type='button'
+                            onClick={() => handleDelete('education', props.id)}
+                            >
+                            Delete
+                        </button>
+                    </form>
+                </section>
+            </NoPrint>
+        );
+    } else {
+        return (
+            <section>
+                <TextSection text={text} />
                 <button
                     className='formBtn'
                     type='button'
-                    // onClick={/* */}
+                    onClick={handleEdit}
                     >
-                    Delete
+                    Edit
                 </button>
-            </form>
-        </section>
-    </NoPrint>
-);
+            </section>
+        );
+    }
 };
 
 export default EducationSection;
