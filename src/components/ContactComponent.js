@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NoPrint, Print } from 'react-easy-print';
+import TextSection from './TextComponent';
 
 const ContactSection = () => {
+
+	const [contact, setContact] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		phone: '',
+	});
+
+	const [editMode, setEditMode] = useState(false);
+
     const handleChange = (e) => {
 		const { name, value } = e.target;
-        //update the the field name value
+		setContact((prevContact) => {
+			return {
+				...prevContact,
+				[name]: value,
+			};
+		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleEdit = () => {
 		e.preventDefault();
-		//submit form
+		setEditMode(true);
 	};
+
+	const { firstName, lastName, email, phone } = contact;
+
+	if (editMode) {		
 
     return (
 		<NoPrint>
@@ -21,7 +41,7 @@ const ContactSection = () => {
 				<form 
                     className='section' 
                     action='' 
-                    // onSubmit={/* */}
+                    onSubmit={handleEdit}
                     >
 					<label>
 						<p>First Name:</p>
@@ -29,8 +49,8 @@ const ContactSection = () => {
 							type='text'
 							placeholder='First Name'
 							name='firstName'
-							// onChange={/* */}
-							// value={/* */}
+							onChange={handleChange}
+							value={firstName}
 							required
 						/>
 					</label>
@@ -41,8 +61,8 @@ const ContactSection = () => {
 							type='text'
 							placeholder='Last Name'
 							name='lastName'
-							// onChange={/* */}
-							// value={/* */}
+							onChange={handleChange}
+							value={lastName}
 							required
 						/>
 					</label>
@@ -53,8 +73,8 @@ const ContactSection = () => {
 							type='email'
 							placeholder='example@gmail.com'
 							name='email'
-							// onChange={/* */}
-							// value={/* */}
+							onChange={handleChange}
+							value={email}
 							required
 						/>
 					</label>
@@ -64,8 +84,8 @@ const ContactSection = () => {
 							type='tel'
 							name='phone'
 							placeholder='123-456-7890'
-							// onChange={/* */}
-							// value={/* */}
+							onChange={handleChange}
+							value={phone}
 							required
 						/>
 					</label>
@@ -76,6 +96,14 @@ const ContactSection = () => {
 			</section>
 		</NoPrint>
 	);
+	} else {
+		return (
+			<TextSection
+				text={`${firstName} ${lastName} | ${email} | ${phone}`}
+				handleEdit={handleEdit}
+			/>
+		);
+	};
 };
 
 export default ContactSection;
