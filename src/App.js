@@ -11,6 +11,7 @@ const App = () =>{
     const handleClick = (section) => {
         if (section === '') {
             //add new professional experience section
+			
         }
         else {
             //add new education credentials section
