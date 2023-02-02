@@ -1,31 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EducationSection from './components/EducationComponent';
-import ExpirienceSection from './components/ExperienceComponent';
+import ExperienceSection from './components/ExperienceComponent';
 import ContactSection from './components/ContactComponent';
 import PrintProvider, { NoPrint, Print } from 'react-easy-print';
+import uniqid from 'uniqid';
 
 
 
 const App = () =>{
+
+	const [experience, setExperience] = useState([]);
+	const [education, setEducation] = useState([]);	
     
     const handleClick = (section) => {
-        if (section === '') {
-            //add new professional experience section
-			
+        if (section === experience) {
+            setExperience((prevExperience) => {return [...prevExperience, {id: uniqid()}]});
         }
         else {
-            //add new education credentials section
+            setEducation((prevEducation) => {return [...prevEducation, {id: uniqid()}]});
         }
     };
 
     const handleDelete = (section, key) => {
-        if (section === ''){
-            //delete professional experience section
+        if (section === experience) {
+            setExperience((prevExperience) => {
+				return prevExperience.filter((item) => item.id !== key);
+			});
         }
         else {
-            //delete education credentials section
+            setEducation((prevEducation) => {
+				return prevEducation.filter((item) => item.id !== key);
+			});
         }
     };
+
+	const educationList = education.map((item) => {
+		return (
+			<EducationSection
+				key={item.id}
+				id={item.id}
+				handleDelete={handleDelete}
+			/>
+		);
+	});
+
+	const experienceList = experience.map((item) => {
+		return (
+			<ExperienceSection
+				key={item.id}
+				id={item.id}
+				handleDelete={handleDelete}
+			/>
+		);
+	});
 
     return(
 		<div>
@@ -35,27 +62,27 @@ const App = () =>{
 						<h1 className='title'>CV-App with React</h1>
 						<Print>
 							<h2 className='subTitle'>Contact Information</h2>
-							<GeneralSection />
+							<ContactSection />
 						</Print>
 						<div>
 							<Print>
 								<h2 className='subTitle'>Professional Experience</h2>
-								{/* */}
+								{experienceList}
 							</Print>
 							<button
 								className='addBtn'
-								// onClick={/* */}
-                                >
+								onClick={() => handleClick(experience)}
+								>
 							</button>
 						</div>
 						<div>
 							<Print>
 								<h2 className='subTitle'>Education</h2>
-								{/*  */}
+								{educationList}
 							</Print>
 							<button
 								className='addBtn'
-								// onClick={/* */}
+								onClick={() => handleClick(education)}
                                 >
 							</button>
 						</div>
@@ -71,7 +98,6 @@ const App = () =>{
 			</PrintProvider>
 		</div>
 	);
-
 }
 
 export default App;
