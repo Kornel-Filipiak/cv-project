@@ -1,6 +1,7 @@
 import React from 'react';
 import { NoPrint, Print } from 'react-easy-print';
 import TextSection from './TextComponent';
+import { Button, Container, Form } from 'react-bootstrap';
 
 const EducationSection = (props) => {
 
@@ -37,15 +38,10 @@ const EducationSection = (props) => {
                 <Print printOnly>
                     <p className='warning'>Fill in the form.</p>
                 </Print>
-                <section>
-                    <form 
-                        className='section' 
-                        action='' 
-                        onSubmit={handleEdit}
-                        >
-                        <label htmlFor='schoolName'>
+                <Form onSubmit={handleEdit}>
+                        <Form.Label htmlFor='schoolName'>
                             <p>School Name:</p>
-                            <input
+                            <Form.Control
                                 type='text'
                                 placeholder='School Name'
                                 name='schoolName'
@@ -54,10 +50,10 @@ const EducationSection = (props) => {
                                 value={schoolName}
                                 required
                             />
-                        </label>
-                        <label>
+                        </Form.Label>
+                        <Form.Label>
                             <p>Field of Study:</p>
-                            <input
+                            <Form.Control
                                 type='text'
                                 placeholder='Field of Study'
                                 name='study'
@@ -65,10 +61,10 @@ const EducationSection = (props) => {
                                 value={study}
                                 required
                             />
-                        </label>
-                        <label>
+                        </Form.Label>
+                        <Form.Label>
                             <p>From:</p>
-                            <input
+                            <Form.Control
                                 type='date'
                                 name='from'
                                 placeholder='From'
@@ -76,11 +72,11 @@ const EducationSection = (props) => {
                                 value={from}
                                 required
                             />
-                        </label>
+                        </Form.Label>
 
-                        <label>
+                        <Form.Label>
                             <p>To:</p>
-                            <input
+                            <Form.Control
                                 type='date'
                                 name='to'
                                 placeholder='To'
@@ -88,31 +84,30 @@ const EducationSection = (props) => {
                                 value={to}
                                 required
                             />
-                        </label>
-                        <button className='formBtn'>Save</button>
-                        <button
+                        </Form.Label>
+                        <Button className='formBtn'>Save</Button>
+                        <Button
                             className='formBtn'
                             type='button'
                             onClick={() => handleDelete('education', props.id)}
                             >
                             Delete
-                        </button>
-                    </form>
-                </section>
+                        </Button>
+                </Form>
             </NoPrint>
         );
     } else {
         return (
-            <section>
+            <Container>
                 <TextSection text={text} />
-                <button
+                <Button
                     className='formBtn'
                     type='button'
                     onClick={handleEdit}
                     >
                     Edit
-                </button>
-            </section>
+                </Button>
+            </Container>
         );
     }
 };
