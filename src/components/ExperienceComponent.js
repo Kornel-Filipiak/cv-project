@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Print, NoPrint } from 'react-easy-print';
 import TextSection from './TextComponent';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 
 const ExperienceSection = (props) => {
 
@@ -118,7 +118,7 @@ const ExperienceSection = (props) => {
 	} else {
 		return (
 			<Print>
-				<section>
+				<Container>
 					<TextSection
 						companyName={companyName}
 						position={position}
@@ -129,7 +129,7 @@ const ExperienceSection = (props) => {
 						handleDelete={handleDelete}
 						id={props.id}
 					/>
-				</section>
+				</Container>
 			</Print>
 		);
 	}
