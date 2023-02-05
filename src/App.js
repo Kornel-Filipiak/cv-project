@@ -4,6 +4,7 @@ import ExperienceSection from './components/ExperienceComponent';
 import ContactSection from './components/ContactComponent';
 import PrintProvider, { NoPrint, Print } from 'react-easy-print';
 import uniqid from 'uniqid';
+import { Container, Button } from 'react-bootstrap';
 
 
 
@@ -58,7 +59,7 @@ const App = () =>{
 		<div>
 			<PrintProvider>
 				<NoPrint>
-					<main>
+					<Container>
 						<h1 className='title'>CV-App with React</h1>
 						<Print>
 							<h2 className='subTitle'>Contact Information</h2>
@@ -69,31 +70,31 @@ const App = () =>{
 								<h2 className='subTitle'>Professional Experience</h2>
 								{experienceList}
 							</Print>
-							<button
+							<Button
 								className='addBtn'
 								onClick={() => handleClick(experience)}
 								>
-							</button>
+							</Button>
 						</div>
 						<div>
 							<Print>
 								<h2 className='subTitle'>Education</h2>
 								{educationList}
 							</Print>
-							<button
+							<Button
 								className='addBtn'
 								onClick={() => handleClick(education)}
                                 >
-							</button>
+							</Button>
 						</div>
-						<button
+						<Button
 							onClick={() => {
 								window.print();
 							}}
 							className='addBtn'>
 							Print
-						</button>
-					</main>
+						</Button>
+					</Container>
 				</NoPrint>
 			</PrintProvider>
 		</div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Print, NoPrint } from 'react-easy-print';
 import TextSection from './TextComponent';
+import { Button, Form } from 'react-bootstrap';
 
 const ExperienceSection = (props) => {
 
@@ -37,15 +38,11 @@ const ExperienceSection = (props) => {
 				<Print printOnly>
 					<p className='warning'>Fill in the form.</p>
 				</Print>
-				<section>
-					<form 
-						action='' 
-						className='section xpSection' 
-						onSubmit={handleEdit}
-						>
-						<label>
+				<Form onSubmit={handleEdit} >
+					<Form.Group className="mb-3" controlId="formBasicCompanyName">
+						<Form.Label>
 							<p>Company Name:</p>
-							<input
+							<Form.Control
 								type='text'
 								placeholder='Company Name'
 								name='companyName'
@@ -53,11 +50,12 @@ const ExperienceSection = (props) => {
 								value={companyName}
 								required
 							/>
-						</label>
-
-						<label>
+						</Form.Label>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId="formBasicPosition">
+						<Form.Label>
 							<p>Position Title:</p>
-							<input
+							<Form.Control
 								type='text'
 								placeholder='Position Title'
 								name='position'
@@ -65,11 +63,12 @@ const ExperienceSection = (props) => {
 								value={position}
 								required
 							/>
-						</label>
-
-						<label>
+						</Form.Label>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId="formBasicDate">
+						<Form.Label>
 							<p>From:</p>
-							<input
+							<Form.Control
 								type='date'
 								name='from'
 								placeholder='From'
@@ -77,11 +76,12 @@ const ExperienceSection = (props) => {
 								value={startDate}
 								required
 							/>
-						</label>
-
-						<label>
+						</Form.Label>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId="formBasicDate">
+						<Form.Label>
 							<p>To:</p>
-							<input
+							<Form.Control
 								type='date'
 								name='to'
 								placeholder='To'
@@ -89,25 +89,30 @@ const ExperienceSection = (props) => {
 								value={endDate}
 								required
 							/>
-						</label>
-						<textarea
+						</Form.Label>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId="formBasicTasks">
+						<Form.Label>Tasks</Form.Label>
+						<Form.Control 
+							as="textarea" 
+							rows={5}
 							name='tasks'
 							className='tasks'
 							placeholder='Main Tasks'
 							onChange={handleChange}
 							value={text}
 							required
-						/>
-						<button className='formBtn'>Save</button>
-						<button
+							/>
+					</Form.Group>
+						<Button className='formBtn'>Save</Button>
+						<Button
 							className='formBtn'
 							type='button'
 							onClick={() => handleDelete(props.id)}
 							>
 							Delete
-						</button>
-					</form>
-				</section>
+						</Button>
+				</Form>
 			</NoPrint>
 		);
 	} else {

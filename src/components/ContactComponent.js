@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NoPrint, Print } from 'react-easy-print';
 import TextSection from './TextComponent';
+import { Button, Form } from 'react-bootstrap';
 
 const ContactSection = () => {
 
@@ -37,15 +38,11 @@ const ContactSection = () => {
 			<Print printOnly>
 				<p className='warning'>Fill in the form.</p>
 			</Print>
-			<section className='contactSection'>
-				<form 
-                    className='section' 
-                    action='' 
-                    onSubmit={handleEdit}
-                    >
-					<label>
+			<Form onSubmit={handleEdit}>
+				<Form.Group className="mb-3" controlId="formBasicFirstName">
+					<Form.Label>
 						<p>First Name:</p>
-						<input
+						<Form.Control
 							type='text'
 							placeholder='First Name'
 							name='firstName'
@@ -53,11 +50,12 @@ const ContactSection = () => {
 							value={firstName}
 							required
 						/>
-					</label>
-
-					<label>
+					</Form.Label>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="formBasicLastName">
+					<Form.Label>
 						<p>Last Name:</p>
-						<input
+						<Form.Control
 							type='text'
 							placeholder='Last Name'
 							name='lastName'
@@ -65,11 +63,12 @@ const ContactSection = () => {
 							value={lastName}
 							required
 						/>
-					</label>
-
-					<label>
+					</Form.Label>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="formBasicEmail">
+					<Form.Label>
 						<p>Email:</p>
-						<input
+						<Form.Control
 							type='email'
 							placeholder='example@gmail.com'
 							name='email'
@@ -77,10 +76,12 @@ const ContactSection = () => {
 							value={email}
 							required
 						/>
-					</label>
-					<label>
+					</Form.Label>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="formBasicPhone">
+					<Form.Label>
 						<p>Phone Number:</p>
-						<input
+						<Form.Control
 							type='tel'
 							name='phone'
 							placeholder='123-456-7890'
@@ -88,12 +89,12 @@ const ContactSection = () => {
 							value={phone}
 							required
 						/>
-					</label>
-					<button className='formBtn generalBtn' type='submit'>
+					</Form.Label>
+				</Form.Group>
+					<Button className='formBtn generalBtn' type='submit'>
 						Save
-					</button>
-				</form>
-			</section>
+					</Button>
+			</Form>
 		</NoPrint>
 	);
 	} else {
